@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/dashboard.css">
+    <title>ระบบหลังบ้าน</title>
+  </head>
+  <body>
+    <?php include 'include/header.php'; ?>
+    <div class="container-fluid">
+      <div class="row">
+        <?php include 'include/sidebarMenu.php'; ?>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">แก้ไขข้อมูลผู้ใช้งาน</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <button type="button" class="btn btn-secondary" onclick="window.location.href='service.php'">ย้อนกลับ</button>
+            </div>
+          </div>
+          <div class="row justify-content-md-center">
+            <div class="col-6">
+              <div class="card">
+                <h5 class="card-header"><?php echo 'ID : '.$result['user_id']; ?></h5>
+                <div class="card-body">
+                  <form method="post">
+                    <div class="mb-3">
+                      <label class="form-label">ชื่อผู้ใช้</label>
+                      <input type="text" class="form-control" name="user_username" value="<?php echo $result['user_username']; ?>" required/>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">ชื่อ</label>
+                      <input type="text" class="form-control" name="user_name" value="<?php echo $result['user_name']; ?>" required/>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">นามสกุล</label>
+                      <input type="text" class="form-control" name="user_surname" value="<?php echo $result['user_surname']; ?>" required/>
+                    </div>
+
+                    <div class="mb-3">
+                      <label class="form-label">เบอร์</label>
+                      <input type="number" class="form-control" name="user_phone" value="<?php echo $result['user_phone']; ?>" required/>
+                    </div>
+
+                    <div class="mb-3">
+                      <label class="form-label">อีเมล์ (ไม่จำเป็นต้องกรอกข้อมูลช่องนี้)</label>
+                      <input type="email" class="form-control" name="user_email" value="<?php echo $result['user_email']; ?>"/>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">ระดับผู้ใช้</label>
+                      <select class="form-select" name="user_level">
+                        <option value="member" <?php if ($result["user_level"] == 'member') {echo " selected";} ?>>สมาชิก</option>
+                        <option value="admin" <?php if ($result["user_level"] == 'admin') {echo " selected";} ?>>ผู้ดูแลระบบ</option>
+                      </select>
+                    </div>
+                    <button type="submit" name="submit" class="btn btn-primary">บันทึก</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <?php mysqli_close($Connection); ?>
+  </body>
+</html>
